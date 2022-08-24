@@ -163,12 +163,14 @@ st_crit = df.index[0] # the first entry
 
 if args.output:
 
+    cols = [df.index.name] + list(df.columns)
+
     with open(args.output, 'w') as f:
         print('## δ/R, Re, St_crit =\t', '\t'.join([dbyr, reynolds, str(st_crit)]), file=f)
-        print('#' + df.index.name + '\t' + '\t'.join(df.columns), file=f)
+        print('#' + '\t'.join(cols), file=f)
         print(df.to_csv(sep='\t', header=False), end='', file=f)
 
-    print(f'Data for δ/R = {dbyr}, Re = {reynolds} written to {args.output}')
+    print(f"Data for ({', '.join(cols)}) with δ/R = {dbyr}, Re = {reynolds} written to {args.output}")
 
 else:
 
